@@ -82,6 +82,7 @@ class UserAdminController {
 
     async adminRegister(req, res) {
         try {
+            console.log("register api hit ")
             const { detailsOfProvider, KYCdetails, KYCurl, bankDetails } = req.body;
             const { email, mobileNumber, Orgname, password, role, accessStatus, isApprovedByAdmin } = detailsOfProvider;
             const { accountHolderName, accountNo, bankName, branchName, ifscCode, cancelledChequeURL } = bankDetails
@@ -120,10 +121,10 @@ class UserAdminController {
                 return res.status(422).json({ message: 'GSTIN already exists', success: false });
             }
             const FSSAIExist = await OrgDetails.findOne({ where: { FSSAINo: FSSAINo } });
-            if (GSTINExist) {
+            if (FSSAIExist) {
                 return res.status(422).json({ message: 'FSSAINo already exists', success: false });
             }
-
+// console.log("FSSAI no. ",FSSAINo)
 
             const UserDetails = {
                 providerId: uuidv4(),
@@ -163,6 +164,7 @@ class UserAdminController {
                 gstURL: gst, // got all above info 
 
             }
+            console.log("organisation",OrganizationDetails);
 
             await userDetails.create(UserDetails);
             await bankInfo.create(BankDetails);
@@ -185,6 +187,7 @@ class UserAdminController {
 
     async adminStoreDetail(req, res) {
         try {
+          
             const { authorization } = req.headers;
             if (!authorization) {
                 return res.status(401).json({ message: 'Authorization header is missing' });

@@ -159,7 +159,7 @@ const formattedHolidays = holidays.map((date) => {
 
 
 const storePayload={
- storeDetails: {
+  storeDetails: {
   category,
     logoURL,
       location: {
@@ -169,7 +169,7 @@ const storePayload={
       locationAvailabilityPANIndia,
       defaultCancellable,
       defaultReturnable,
-      fulfillment: [
+      fulfillments: [
         ...(deliveryChecked
           ? [
             {

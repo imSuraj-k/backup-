@@ -60,7 +60,7 @@ const MultiStepForm = () => {
       accountNo: "",
       bankName: "",
       branchName: "",
-      ifscCode: "",
+      ifscCode: "545634563",
       cancelledChequeURL: null,
     },
   });
