@@ -164,7 +164,6 @@ class UserAdminController {
                 gstURL: gst, // got all above info 
 
             }
-            console.log("organisation",OrganizationDetails);
 
             await userDetails.create(UserDetails);
             await bankInfo.create(BankDetails);
