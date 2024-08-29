@@ -14,14 +14,15 @@ import {
   Typography,
   Card,
   CardMedia,
-  IconButton
-
+  IconButton,
+  CircularProgress,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const AddProductPage = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     commonDetails: {
       productCode: "",
@@ -146,10 +147,11 @@ const AddProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const token = Cookies.get("token");
       console.log(token);
-
+     
       const response = await fetch("http://localhost:8080/product/ProductCreate", {
         method: "POST",
         headers: {
@@ -168,6 +170,9 @@ const AddProductPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -1025,9 +1030,14 @@ const AddProductPage = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
-              Submit
-            </Button>
+          <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? <CircularProgress size={24} color="warning" /> : "Submit"}
+              </Button>
           </Grid>
         </Grid>
       </form>

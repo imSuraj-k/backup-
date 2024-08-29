@@ -18,7 +18,6 @@ import {
   Box,
   InputLabel,
   Paper,
-  CircularProgress,
 } from "@mui/material";
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -26,11 +25,11 @@ import AddIcon from '@mui/icons-material/Add';
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-export default function Store() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+export default function TestStore() {
+//   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [category, setCategory] = useState("");
@@ -206,7 +205,7 @@ const storePayload={
       email,
       mobile,
     },
-
+ 
       logisticsDeliveryType,
       logisticsBppId: networkLogistics === "on" ? logisticsBppId : null,
       deliveryTime: networkLogistics !== "on" ? deliveryTime : null,
@@ -259,7 +258,7 @@ const storePayload={
     try {
       const token = Cookies.get("token");
       console.log("update api token", token);
-      setLoading(true);
+  
       const response = await fetch("http://localhost:8080/dashboard/adminStoreDetails", {
         method: "POST",
         headers: {
@@ -268,20 +267,17 @@ const storePayload={
         },
         body: JSON.stringify(storePayload),  // Send storeDetails directly
       });
-    
+  
       const data = await response.json();
       console.log("data", data);
   
       if (data.success===true) {
-        navigate("/");
+        // navigate("/");
       } else {
         console.log("Request failed", data.message || "Unknown error");
       }
     } catch (error) {
       console.error("error:", error);
-    }
-    finally {
-      setLoading(false);
     }
   };
 
@@ -863,17 +859,9 @@ const storePayload={
 
           </Grid>
           <Grid item xs={12}>
-            {/* <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
               Submit
-            </Button> */}
-            <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? <CircularProgress size={24} color="warning" /> : "Submit"}
-              </Button>
+            </Button>
           </Grid>
         </Grid>
       </form>

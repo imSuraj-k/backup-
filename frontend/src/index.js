@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // import AddProductTwo from './pages/AddProductPage/AddProductTwo';
 // import Productt from './Backup/Productt';
 // import Datee from './Backup/Datee';
-
+//  import TestStore from './pages/Store/TestStore';
 
 // import Multis from './pages/MultiStepForm/Multis';
 // import MultiStepForm from './pages/MultiStepForm/MultiStepForm';
@@ -47,6 +47,7 @@ root.render(
       {/* <FrontPage/> */}
      {/* <FormData/> */}
       {/* <Customize/> */}
+      {/* <TestStore/>   */}
 
       <ToastContainer />
       <ToastContainer
